@@ -6,13 +6,13 @@ from scrapy.spiders import CrawlSpider, Rule
 
 
 class FundaSpider(CrawlSpider):
-    name = 'funda_koop'
+    name = 'funda_verkocht'
     allowed_domains = ['funda.nl']
     start_urls = []
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'
 
     def start_requests(self):
-        yield scrapy.Request(url='http://www.funda.nl/koop/amsterdam/', headers={
+        yield scrapy.Request(url='https://www.funda.nl/koop/amsterdam/verkocht/sorteer-afmelddatum-af/', headers={
             'User-Agent': self.user_agent
         })
 

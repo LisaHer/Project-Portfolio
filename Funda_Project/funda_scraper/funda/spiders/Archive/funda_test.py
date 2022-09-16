@@ -1,10 +1,12 @@
+#koop, huur
+
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 
 
 class FundaSpider(CrawlSpider):
-    name = 'funda_old'
+    name = 'funda_test'
     allowed_domains = ['funda.nl']
     start_urls = []
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'
@@ -26,6 +28,7 @@ class FundaSpider(CrawlSpider):
 
     def parse_item(self, response):
         yield{
-            'address': response.xpath("//span[@class='object-header__title']/text()").get(),
-            'postal_code': response.xpath("//span[@class='object-header__subtitle fd-color-dark-3']/text()").get()
+            'address': response.xpath("normalize-space(//span[@class='object-header__title']/text())").get(),
+            'offered_since': response.xpath("normalize-space(//dt[.='Aangeboden sinds']/following-sibling::dd[1]/span[1]/text())").get()
+
         }
